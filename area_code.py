@@ -45,8 +45,8 @@ class Crawler(object):
             province_code = province_code.ljust(6, '0')  # 6位长度，不全补0
             print('开始爬取省份信息(%s,%s)'%(province_name, province_code))
             province_association = Association(0, province_name, province_code)
-            province_association.to_sql()
-            # self.write_file(province_association.to_sql())  # 写入省份
+            # province_association.to_sql()
+            self.write_file(province_association.to_sql())  # 写入省份
             parent_id = province_association._id  # 省份的id
             print('#'*4+'开始爬取市级信息'+'#'*4)
             for city in province.ul.children:
@@ -56,8 +56,8 @@ class Crawler(object):
                         city_name, city_code = city_h5_str.split(' ', 1)
                         city_code = city_code.ljust(6, '0')
                         city_association = Association(parent_id, city_name, city_code)
-                        city_association.to_sql()
-                        # self.write_file(city_association.to_sql())  # 写入市
+                        # city_association.to_sql()
+                        self.write_file(city_association.to_sql())  # 写入市
             print('#'*4+'市级信息爬取完成'+'#'*4)
             print('省份信息(%s,%s)爬取完成!\n'%(province_name, province_code))
 
